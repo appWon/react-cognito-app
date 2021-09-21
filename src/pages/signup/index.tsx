@@ -41,23 +41,23 @@ const validationSchema = yup.object({
 });
 
 const Signup: React.FC = () => {
-  const { values, errors, handleSubmit, handleChange, touched } = useFormik({
+  const { values, errors, handleChange, touched, ...formik } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const result = await cognitoSignUp(values);
-
-        console.log(result);
-      } catch (err) {
-        console.log(err);
+        await cognitoSignUp(values);
+      } catch (err: any) {
+        if (err.message === "An account with the given email already exists.") {
+          formik.setErrors({ ...errors, email: "중복 이메일 입니다." });
+        }
       }
     },
   });
 
   return (
     <S.SignupContainer>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <S.InputText
           id="email"
           type="text"
