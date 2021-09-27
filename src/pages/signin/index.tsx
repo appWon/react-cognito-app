@@ -1,33 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "./style.signin";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@material-ui/core";
 
-const Signin = () => {
-  const [signinData, setSigninData] = useState({});
+import { signIn, SignInInfo } from "../../store/auth";
+import { authSelector } from "../../store/selector";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setSigninData({ ...signinData, [id]: value });
-  };
+const initialValues = {
+  email: "",
+  password: "",
+};
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+const validationSchema = yup.object({
+  email: yup.string().email("이메일을 확인해 주세요").required(),
+  password: yup
+    .string()
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "숫자 . 영문 . 특수문자 조합으로 암호를 입력해주세요 "
+    )
+    .required(),
+});
+
+const Signin: React.FC = ({ location }: any) => {
+  const { token } = useSelector(authSelector);
+
+  const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async (signinInfo: SignInInfo) => {
+      await dispatch(signIn(signinInfo));
+    },
+  });
+
+  const { from } = location.state || { from: { pathname: "/" } };
+  if (token) {
+    return <Redirect to={from} />;
+  }
 
   return (
     <S.SigninContainer>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <S.InputText
           id="email"
-          label="이메일 주소"
           type="email"
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          error={Boolean(formik.errors.email && formik.touched.email)}
+          label={
+            formik.errors.email && formik.values.email
+              ? formik.errors.email
+              : "이메일"
+          }
         />
         <S.InputText
           id="password"
-          label="비밀번호"
           type="password"
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          error={Boolean(formik.errors.password && formik.touched.password)}
+          label={
+            formik.errors.password && formik.values.password
+              ? formik.errors.password
+              : "암호"
+          }
         />
         <Button type="submit" fullWidth variant="contained" color="primary">
           로그인

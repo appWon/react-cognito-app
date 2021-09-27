@@ -1,6 +1,7 @@
 import React from "react";
-import * as S from "./style.signin";
+import * as S from "./style.signup";
 import * as yup from "yup";
+import { useHistory } from "react-router";
 import { useFormik } from "formik";
 import { Button } from "@material-ui/core";
 
@@ -41,12 +42,15 @@ const validationSchema = yup.object({
 });
 
 const Signup: React.FC = () => {
+  const history = useHistory();
+
   const { values, errors, handleChange, touched, ...formik } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
       try {
         await cognitoSignUp(values);
+        history.push("/signin");
       } catch (err: any) {
         if (err.message === "An account with the given email already exists.") {
           formik.setErrors({ ...errors, email: "중복 이메일 입니다." });
