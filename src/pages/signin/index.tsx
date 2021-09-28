@@ -26,7 +26,7 @@ const validationSchema = yup.object({
     .required(),
 });
 
-const Signin: React.FC = ({ location }: any) => {
+const Signin: React.FC = ({ location, ...props }: any) => {
   const { token } = useSelector(authSelector);
 
   const dispatch = useDispatch();
@@ -38,6 +38,10 @@ const Signin: React.FC = ({ location }: any) => {
       await dispatch(signIn(signinInfo));
     },
   });
+
+  const handleClick = () => {
+    props.history.push("/signup");
+  };
 
   const { from } = location.state || { from: { pathname: "/" } };
   if (token) {
@@ -71,6 +75,16 @@ const Signin: React.FC = ({ location }: any) => {
         />
         <Button type="submit" fullWidth variant="contained" color="primary">
           로그인
+        </Button>
+        <hr />
+        <Button
+          type="button"
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+        >
+          회원가입
         </Button>
       </form>
     </S.SigninContainer>
