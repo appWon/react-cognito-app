@@ -144,7 +144,7 @@ export const setAttribute = async (attribute: any) => {
   });
 };
 
-export const signOut = () => {
+export const cognitoSignOut = () => {
   if (currentUser) {
     currentUser.signOut();
   }

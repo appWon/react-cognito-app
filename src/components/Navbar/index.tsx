@@ -1,4 +1,7 @@
 import React from "react";
+import { authSelector } from "../../store/selector";
+import { animateScroll as scroll } from "react-scroll";
+import { useSelector, useDispatch } from "react-redux";
 import { FaBars } from "react-icons/fa";
 import {
   Nav,
@@ -9,37 +12,73 @@ import {
   NavItem,
   NavLinks,
   NavBtn,
-  NavBtnLink,
+  LinkButton,
+  Button,
 } from "./style.navbar";
+import { signOut } from "../../store/auth";
 
 interface NavbarType {
   toggle: () => void;
 }
 
 const Navbar: React.FC<NavbarType> = ({ toggle }) => {
+  const [scrollNav, setScrollNav] = React.useState(false);
+  const { token } = useSelector(authSelector);
+
+  const dispatch = useDispatch();
+
+  const viewHome = () => {
+    scroll.scrollToTop();
+  };
+
+  const handleClickSignOut = () => {
+    dispatch(signOut());
+  };
+
+  const changeNav = () => {
+    if (window.scrollY >= 80) {
+      setScrollNav(true);
+    } else {
+      setScrollNav(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", changeNav);
+  }, []);
+
   return (
-    <Nav>
+    <Nav scrollNav={scrollNav}>
       <NavBarContainer>
-        <NavLogo to="/">test</NavLogo>
+        <NavLogo to="/" onClick={viewHome}>
+          JJ Web
+        </NavLogo>
         <MobileIcon onClick={toggle}>
           <FaBars />
         </MobileIcon>
         <NavMenu>
           <NavItem>
-            <NavLinks to="about">About</NavLinks>
+            <NavLinks to="about" smooth spy duration={500} offset={-80}>
+              About
+            </NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks to="discover">About</NavLinks>
+            <NavLinks to="discover" smooth spy duration={500} offset={-80}>
+              About
+            </NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks to="services">서비스</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to="signup">회원가입</NavLinks>
+            <NavLinks to="otherServices" smooth spy duration={500} offset={-80}>
+              서비스
+            </NavLinks>
           </NavItem>
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to="/signin">로그인</NavBtnLink>
+          {!token ? (
+            <LinkButton to="/signin">로그인</LinkButton>
+          ) : (
+            <Button onClick={handleClickSignOut}>로그아웃</Button>
+          )}
         </NavBtn>
       </NavBarContainer>
     </Nav>

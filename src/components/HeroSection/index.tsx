@@ -1,5 +1,5 @@
 import React from "react";
-import mainVideo from "../videos/testVideo.mp4";
+import mainVideo from "../../assets/video/mainVideo.mp4";
 import {
   HeroContainer,
   HeroBg,
@@ -11,7 +11,7 @@ import {
   ArrowForward,
   ArrowRight,
 } from "./style.heroSection";
-import { Button } from "../Button";
+import { RouteButton } from "../Button";
 
 const HereoSection = () => {
   const [hover, setHover] = React.useState(false);
@@ -26,15 +26,16 @@ const HereoSection = () => {
         <VideoBg autoPlay loop muted src={mainVideo} />
       </HeroBg>
       <HeroContent>
-        <HeroH1>Virtual Banking Made Easy</HeroH1>
-        <HeroP>
-          Sign up for a new accoun today and receive $250 credit towards your
-          newxt payment
-        </HeroP>
+        <HeroH1>쉽게 관리하는 서비스</HeroH1>
+        <HeroP>간단하게 몇번의 클릭으로 모든걸 해결해 보세요</HeroP>
         <HeroBtnWrapper>
-          <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover}>
-            Get started {hover ? <ArrowForward /> : <ArrowRight />}
-          </Button>
+          <RouteButton
+            to="signup"
+            onMouseEnter={onHover}
+            onMouseLeave={onHover}
+          >
+            시작하기 {hover ? <ArrowForward /> : <ArrowRight />}
+          </RouteButton>
         </HeroBtnWrapper>
       </HeroContent>
     </HeroContainer>

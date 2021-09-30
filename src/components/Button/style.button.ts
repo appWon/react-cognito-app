@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 
-interface ButtonType {
+interface ButtonType extends LinkProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-  primary?: boolean;
-  dark?: boolean;
+  primary?: number;
   fontBig?: boolean;
+  dark?: number;
   big?: boolean;
-  to: string;
 }
 
-export const StyledButton = styled(Link)<ButtonType>`
+export const LinkButton = styled(Link)<ButtonType>`
   border-radius: 50px;
   white-space: nowrap;
   outline: none;

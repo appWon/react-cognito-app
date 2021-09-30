@@ -8,12 +8,17 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import DashBoard from "./pages/dashbord";
 
+require("./App.css");
+
 const App: React.FC = () => {
+  React.useEffect(() => {
+    console.log("sdf");
+  }, []);
   return (
     <BrowserRouter>
       <Switch>
         <PrivateRoute exact path="/dashboard" component={DashBoard} />
-        <PrivateRoute exact path="/" component={Main} />
+        <Route exact path="/" component={Main} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
       </Switch>

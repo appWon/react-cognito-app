@@ -10,7 +10,12 @@ import {
   UpdateAuthState,
 } from "./types";
 import { CognitoUserSession } from "amazon-cognito-identity-js";
-import { getSession, getAttributes, cognitoSignIn } from "../../lib/cognito";
+import {
+  getSession,
+  getAttributes,
+  cognitoSignIn,
+  cognitoSignOut,
+} from "../../lib/cognito";
 
 export const addUserInfo = (userInfo: userInfo): AddUserInfo => ({
   type: "ADD_USER_INFO",
@@ -90,3 +95,29 @@ export const getAuthenticate =
       dispatch(updateError("로그인 정보가 없습니다."));
     }
   };
+
+export const signOut = () => (dispatch: Dispatch<UpdateAuthState>) => {
+  const userInfo = {
+    sub: "",
+    name: "",
+    email: "",
+    email_verified: "",
+    phone_number: "",
+    phone_number_verified: "",
+  };
+
+  dispatch(
+    updateAuthState({
+      user: userInfo,
+      token: "",
+      isLoading: false,
+      error: "",
+    })
+  );
+
+  try {
+    cognitoSignOut();
+  } catch (err) {
+    console.error(err);
+  }
+};

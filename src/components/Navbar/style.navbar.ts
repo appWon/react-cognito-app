@@ -1,18 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link as LinkRouter } from "react-router-dom";
 import { Link as LinkScroll } from "react-scroll";
 
-export const Nav = styled.nav`
+interface NavType {
+  scrollNav: boolean;
+}
+
+export const Nav = styled.nav<NavType>`
   display: flex;
   justify-content: center;
   align-items: center;
   position: sticky;
   height: 80px;
-  /* margin-top: -80px; */
+  margin-top: -80px;
   top: 0;
   z-index: 10;
   font-size: 1rem;
-  background-color: #000;
+  background: ${({ scrollNav }) => (scrollNav ? "#000" : "transparent")};
 
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
@@ -95,7 +99,7 @@ export const NavBtn = styled.nav`
   }
 `;
 
-export const NavBtnLink = styled(LinkRouter)`
+const ButtonStyle = css`
   border-radius: 50px;
   background-color: #01bf71;
   white-space: nowrap;
@@ -112,4 +116,12 @@ export const NavBtnLink = styled(LinkRouter)`
     background-color: #fff;
     color: #010606;
   }
+`;
+
+export const LinkButton = styled(LinkRouter)`
+  ${ButtonStyle}
+`;
+
+export const Button = styled.button`
+  ${ButtonStyle}
 `;

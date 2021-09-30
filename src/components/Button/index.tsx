@@ -1,16 +1,16 @@
 import React from "react";
-import { StyledButton } from "./style.button";
+import { LinkButton } from "./style.button";
+import { LinkProps } from "react-router-dom";
 
-interface ButtonType {
+interface ButtonType extends LinkProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-  primary?: boolean;
-  dark?: boolean;
+  primary?: number;
   fontBig?: boolean;
+  dark?: number;
   big?: boolean;
-  to: string;
 }
 
-export const Button: React.FC<ButtonType> = (props) => {
-  return <StyledButton {...props} />;
+export const RouteButton: React.FC<ButtonType> = (props) => {
+  return <LinkButton {...props} />;
 };

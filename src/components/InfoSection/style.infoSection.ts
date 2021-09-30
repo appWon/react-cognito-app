@@ -17,6 +17,8 @@ interface SubtitleType {
 }
 
 export const InfoContainer = styled.div<InfoContainerType>`
+  display: flex;
+  justify-content: center;
   color: #fff;
   background: ${({ lightBg }) => (lightBg ? "#f9f9f9" : "#010606")};
 
@@ -42,23 +44,23 @@ export const InfoRow = styled.div<InfoRowType>`
   grid-auto-columns: minmax(auto, 1fr);
   align-items: center;
   grid-template-areas: ${({ imgStart }) =>
-    imgStart ? "col2 col1" : `col1 col2`};
+    imgStart ? `'col2 col1'` : `'col1 col2'`};
 
   @media screen and (max-width: 768px) {
-    grid-template-area: ${({ imgStart }) =>
-      imgStart ? `col1 col2` : `'col11 col1 'col2 col2'`};
+    grid-template-areas: ${({ imgStart }) =>
+      imgStart ? `'col1' 'col2'` : `'col1 col1' 'col2 col2'`};
   }
 `;
 
 export const Column1 = styled.div`
   margin-bottom: 15px;
-  padding: -15px;
+  padding: 0 15px;
   grid-area: col1;
 `;
 
 export const Column2 = styled.div`
   margin-bottom: 15px;
-  padding: -15px;
+  padding: 0 15px;
   grid-area: col2;
 `;
 
@@ -95,7 +97,7 @@ export const Subtitle = styled.p<SubtitleType>`
   margin-bottom: 35px;
   font-size: 18px;
   line-height: 24px;
-  color: ${({ darkText }) => (darkText ? "#010606" : "#f7f8fa")};
+  color: ${({ darkText }) => (darkText ? "#010606" : "#fff")};
 `;
 
 export const BtnWrap = styled.div`
