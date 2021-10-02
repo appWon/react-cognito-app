@@ -15,7 +15,10 @@ export const PrivateRoute = ({ component: Component, ...rest }: any) => {
   }, []);
 
   return !isLoading ? (
-    <div>로딩 중</div>
+    <>
+      <Component />
+      <div>로딩 중</div>
+    </>
   ) : (
     <Route
       {...rest}
