@@ -12,4 +12,5 @@ export const AdminMenuWrap = styled.aside<AdminMenuWrapType>`
   white-space: nowrap;
   overflow: hidden;
   width: ${({ fold }) => (fold ? "70px" : "240px")};
+  height: calc(100vh - 71px);
 `;

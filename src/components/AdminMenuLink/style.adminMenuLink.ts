@@ -1,13 +1,15 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link, LinkProps } from "react-router-dom";
 
-interface AdminMenuLinkType {
+interface AdminMenuLinkType extends LinkProps {
+  location: string;
   subMenu?: boolean;
   fold?: boolean;
 }
 
 export const AdminMenuLinkContainer = styled.div<AdminMenuLinkType>`
-  width: 250px;
+  position: relative;
+  width: 240px;
   color: #000000;
   margin-bottom: 10px;
   padding: ${({ subMenu, fold }) =>
@@ -16,6 +18,20 @@ export const AdminMenuLinkContainer = styled.div<AdminMenuLinkType>`
   &:hover {
     background-color: #ede3e3;
   }
+
+  ${({ location, to }) =>
+    location === to &&
+    css`
+      &::after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        left: 0;
+        top: 0;
+        background: red;
+      }
+    `};
 `;
 
 export const AdminMenuLinkWrap = styled(Link)`

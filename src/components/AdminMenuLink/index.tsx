@@ -5,6 +5,7 @@ import {
   AdminMenuIcon,
   AdminMenuText,
 } from "./style.adminMenuLink";
+import { useHistory } from "react-router";
 import { LinkProps } from "react-router-dom";
 
 interface AdminMenuLinkProps extends LinkProps {
@@ -16,9 +17,18 @@ interface AdminMenuLinkProps extends LinkProps {
 
 const AdminMenuLink: React.FC<AdminMenuLinkProps> = (props) => {
   const { to, name, icon, subMenu, fold } = props;
+  const { location } = useHistory();
+
+  console.log(to);
+  console.log(location);
 
   return (
-    <AdminMenuLinkContainer subMenu={subMenu} fold={fold}>
+    <AdminMenuLinkContainer
+      to={to}
+      fold={fold}
+      subMenu={subMenu}
+      location={location.pathname}
+    >
       <AdminMenuLinkWrap to={to}>
         <AdminMenuIcon>{icon}</AdminMenuIcon>
         <AdminMenuText>{name}</AdminMenuText>

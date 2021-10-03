@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AdminToggleMenuContainer = styled.div`
-  width: 250px;
+  width: 240px;
   color: #000000;
   cursor: pointer;
 `;

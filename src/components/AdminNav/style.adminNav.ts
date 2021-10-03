@@ -5,6 +5,7 @@ export const AdminNavContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  border-bottom: 1px solid gray;
 `;
 
 export const AdminNavWrap = styled.div`
