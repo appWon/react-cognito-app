@@ -1,18 +1,15 @@
 import styled from "styled-components";
-import { List, ListProps } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
-interface MenuProps extends ListProps {
-  component?: string;
+interface AdminMenuWrapType {
+  fold: Boolean;
 }
 
-export const Menu = styled(List)<MenuProps>`
-  width: 100%;
-  max-width: 240px;
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+export const AdminMenuWrap = styled.aside<AdminMenuWrapType>`
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s ease-in-out;
+  border-right: 1px solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  width: ${({ fold }) => (fold ? "70px" : "240px")};
 `;
-
-export const Item = styled(Link)``;

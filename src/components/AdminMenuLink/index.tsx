@@ -1,24 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { AdminMenuLinkContainer } from "./style.adminMenuLink";
+import {
+  AdminMenuLinkContainer,
+  AdminMenuLinkWrap,
+  AdminMenuIcon,
+  AdminMenuText,
+} from "./style.adminMenuLink";
 import { LinkProps } from "react-router-dom";
-import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 interface AdminMenuLinkProps extends LinkProps {
   name: string;
   icon: React.ReactElement;
   subMenu?: boolean;
+  fold?: boolean;
 }
 
 const AdminMenuLink: React.FC<AdminMenuLinkProps> = (props) => {
-  const { to, name, icon, subMenu } = props;
+  const { to, name, icon, subMenu, fold } = props;
 
   return (
-    <AdminMenuLinkContainer subMenu={subMenu}>
-      <ListItem button component={Link} to={to}>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText>{name}</ListItemText>
-      </ListItem>
+    <AdminMenuLinkContainer subMenu={subMenu} fold={fold}>
+      <AdminMenuLinkWrap to={to}>
+        <AdminMenuIcon>{icon}</AdminMenuIcon>
+        <AdminMenuText>{name}</AdminMenuText>
+      </AdminMenuLinkWrap>
     </AdminMenuLinkContainer>
   );
 };

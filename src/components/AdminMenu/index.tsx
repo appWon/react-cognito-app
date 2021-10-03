@@ -1,13 +1,13 @@
 import React from "react";
-import { Menu } from "./style.adminMenu";
+import { AdminMenuWrap } from "./style.adminMenu";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { unstable_createMuiStrictModeTheme as strictModeTheme } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
+import { adminSelector } from "../../store/selector";
+import { StarBorder, Dashboard } from "@material-ui/icons";
 
 import AdminMenuLink from "../AdminMenuLink";
-import AdminMenuList from "..//AdminMenuList";
-
-import { StarBorder, Dashboard } from "@material-ui/icons";
-import { ListItemIcon, ListItemText, ListItem } from "@material-ui/core";
+import AdminToggleMenu from "../AdminToggleMenu";
 
 const theme = strictModeTheme();
 
@@ -17,6 +17,7 @@ const AdminMenu: React.FC = () => {
   const [open, setOpen] = React.useState({
     contents: true,
   });
+  const { menuFold } = useSelector(adminSelector);
 
   const handleClick = (menu: MenuName) => {
     setOpen({ ...open, [menu]: !open[menu] });
@@ -24,9 +25,9 @@ const AdminMenu: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Menu component="aside">
+      <AdminMenuWrap fold={menuFold}>
         <AdminMenuLink to="/admin" name="홈" icon={<Dashboard />} />
-        <AdminMenuList
+        <AdminToggleMenu
           name="test"
           icon={<Dashboard />}
           open={open.contents}
@@ -36,16 +37,18 @@ const AdminMenu: React.FC = () => {
             subMenu
             to="/admin"
             name="서브메뉴1"
+            fold={menuFold}
             icon={<StarBorder />}
           />
           <AdminMenuLink
             subMenu
             to="/admin"
             name="서브메뉴2"
+            fold={menuFold}
             icon={<StarBorder />}
           />
-        </AdminMenuList>
-      </Menu>
+        </AdminToggleMenu>
+      </AdminMenuWrap>
     </ThemeProvider>
   );
 };
