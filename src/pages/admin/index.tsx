@@ -1,16 +1,21 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { AdminMainContainer, AdminContentWrap } from "./style.admin";
 
 import AdminMenu from "../../components/AdminMenu";
 import AdminNav from "../../components/AdminNav";
+import AdminMainContent from "../../components/AdminMain";
 
-const Admin: React.FC<RouteComponentProps> = (props) => {
+const AdminMain: React.FC<RouteComponentProps> = (props) => {
   return (
-    <>
+    <AdminMainContainer>
       <AdminNav />
-      <AdminMenu />
-    </>
+      <AdminContentWrap>
+        <AdminMenu />
+        <AdminMainContent />
+      </AdminContentWrap>
+    </AdminMainContainer>
   );
 };
 
-export default Admin;
+export default AdminMain;

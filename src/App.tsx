@@ -7,6 +7,7 @@ import Main from "./pages/main";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Admin from "./pages/admin";
+import Upload from "./pages/upload";
 
 import { getAuthenticate } from "./store/auth";
 
@@ -23,6 +24,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <PrivateRoute exact path="/admin" component={Admin} />
+        <PrivateRoute exact path="/upload" component={Upload} />
         <Route exact path="/" component={Main} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />

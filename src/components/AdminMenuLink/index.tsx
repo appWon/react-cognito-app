@@ -19,9 +19,6 @@ const AdminMenuLink: React.FC<AdminMenuLinkProps> = (props) => {
   const { to, name, icon, subMenu, fold } = props;
   const { location } = useHistory();
 
-  console.log(to);
-  console.log(location);
-
   return (
     <AdminMenuLinkContainer
       to={to}

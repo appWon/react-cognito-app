@@ -21,7 +21,7 @@ const AdminMenu: React.FC = (props) => {
 
   return (
     <AdminMenuWrap fold={menuFold}>
-      <AdminMenuLink to="/admin" name="홈" icon={<Dashboard />} />
+      <AdminMenuLink to="/admin" name="대시보드" icon={<Dashboard />} />
       <AdminToggleMenu
         name="test"
         icon={<Dashboard />}
