@@ -6,8 +6,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Main from "./pages/main";
 import Signin from "./pages/signin";
 import Signup from "./pages/signup";
-import Admin from "./pages/admin";
 import Upload from "./pages/upload";
+import Admin from "./pages/dashboard";
 
 import { getAuthenticate } from "./store/auth";
 
@@ -28,6 +28,7 @@ const App: React.FC = () => {
         <Route exact path="/" component={Main} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/upload" component={Signup} />
       </Switch>
     </BrowserRouter>
   );
