@@ -1,4 +1,5 @@
 import { Storage } from "aws-amplify";
+import { config } from "../../lib/config";
 
 export const put = async (
   formData: any,
@@ -15,11 +16,30 @@ export const put = async (
         contentType: value.type,
       });
 
-      putDB = { ...putDB, [key]: s3.key };
+      putDB = {
+        ...putDB,
+        [key]: {
+          bucket: config.s3.BUCKET,
+          region: config.s3.REGION,
+          key: `public/${s3.key}`,
+        },
+      };
     } else {
       putDB = { ...putDB, [key]: value };
     }
   }
 
   db(putDB);
+};
+
+export const getImages = async (list: any) => {
+  return Promise.all(list.map((param: any) => Storage.get(param.image.key)));
+};
+
+export const getImage = async (image: any) => {
+  return await Storage.get(image.key);
+};
+
+export const getVideo = async (video: any) => {
+  return await Storage.get(video.key);
 };
