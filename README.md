@@ -71,10 +71,10 @@
 >            "Action": [
 >                "appsync:GraphQL"
 >            ],
->					  "Resource": [
->					  "arn:aws:appsync:지역:계정ID:apis/appSyncID/types/Query/fields/특정 쿼리",
->					  "arn:aws:appsync:지역:계정ID:apis/appSyncID/types/Query/fields/특정 쿼리"
->           ]
+> 	    "Resource": [
+>               "arn:aws:appsync:지역:계정ID:apis/appSyncID/types/Query/fields/특정 쿼리",
+>               "arn:aws:appsync:지역:계정ID:apis/appSyncID/types/Query/fields/특정 쿼리"
+>             ]
 >        }
 >    ]
 >}
